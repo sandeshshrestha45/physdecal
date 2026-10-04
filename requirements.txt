@@ -1,0 +1,11 @@
+# Versions this code was last run with (Python 3.11, CUDA 12.4).
+# Install torch/torchvision from https://pytorch.org for your CUDA version first.
+torch==2.6.0
+torchvision==0.21.0
+transformers==5.16.1
+opencv-python==5.0.0
+numpy==2.4.6
+matplotlib==3.11.1
+pillow==12.3.0
+kornia==0.8.3          # optional
+ultralytics==8.4.150   # optional, YOLO arm only

@@ -1,0 +1,17 @@
+# run outputs: patches, results, figures, logs, caches, print sheets, photos
+/out/
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# regenerated from code, so not tracked
+/data/reference/anchor_*.png
+/data/reference/inkchart/*.png
+/data/reference/inkchart/*.pdf
+
+# base checkpoints Ultralytics downloads into the working directory
+/*.pt

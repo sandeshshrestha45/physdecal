@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "physdecal"
+version = "0.1.0"
+description = "Printable roof decals against aerial segmentation and detection, from a constrained objective to a physical measurement."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "transformers>=4.30",
+    "opencv-python>=4.7",   # cv2.aruco.ArucoDetector arrived in 4.7
+    "matplotlib",
+    "pillow",
+]
+
+[project.optional-dependencies]
+yolo = ["ultralytics>=8.0"]   # the YOLO transfer target
+kornia = ["kornia>=0.7"]      # faster warp; a native fallback is built in
+
+[project.scripts]
+physdecal = "physdecal.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["physdecal*"]
