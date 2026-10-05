@@ -27,6 +27,25 @@ Dataset: GeoPatchCity (AirSim, Downtown West, Vehicle Variety Pack v1).
   recovery from markers, mask annotation and tracking, and scoring of
   photograph pairs.
 
+## The bright-colour study (`paper/`)
+
+`paper/main.tex` is the paper built on this code. Its patches hold every
+pixel at a bright, saturated colour (`optimize --bright`), because photographs
+of the earlier printed patch showed it lost about half its lightness contrast
+between print and camera (`physdecal photofit`). Every patch is optimised for
+the 50-epoch default. Reproduce with
+
+```bash
+sh experiments/run_bright.sh > out/logs/run_bright.log 2>&1
+physdecal fig-bright --out paper/figures
+```
+
+New pieces: `patch.BrightTexture` (`--bright`, `BRIGHT_S_MIN`/`BRIGHT_V_MIN`),
+`evaluate --stress glare|dim|flat|desat|blur|photo` and `--baseline bright`,
+`physdecal photofit` (writes `data/reference/photo_channel.json`),
+`physdecal figures --full` (whole frames instead of vehicle crops), and
+`physdecal fig-bright`.
+
 ## Install
 
 ```bash
@@ -42,7 +61,7 @@ refuses to run from a non-editable install. `requirements.txt` pins the
 versions it was last run with (Python 3.11, torch 2.6, CUDA 12.4).
 
 ## Dataset
-
+Dataset  link: https://drive.google.com/file/d/1u8yCl0wTjy8mGnqs9wLZOO5wDPeKv4Mm/view?usp=sharing
 The GeoPatchCity capture is opened **read only**. Point the repository at it:
 
 ```bash
@@ -118,10 +137,11 @@ used `--steps 3000`, and the `experiments/` scripts keep that.
 | | `report`, `stats`, `asr`, `viewpoint` | tables, bootstrap CIs, nadir/all ASR, transfer envelope |
 | | `lighting`, `manifest` | lighting-label verification; `out/EXPERIMENTS.md` |
 | figures | `figures`, `allfigs`, `gradcam` | inference panels (seg, det, compare, gallery), roster tables, Grad-CAM |
-| | `fig-ce`, `fig-h1`, `fig-loss` | the paper's summary figures |
+| | `fig-ce`, `fig-h1`, `fig-loss`, `fig-bright` | the papers' summary figures |
 | physical | `export-print` | true-scale sheets with ArUco fiducials, multi-page PDF |
 | | `physical` | `plan`, `ingest`, `annotate`, `track`, `score`, `panel`, `segpanel` |
 | | `automask`, `altitude` | draft vehicle masks; fiducial-free altitude recovery |
+| | `photofit` | register a printed patch in its photographs, fit the print+photo colour channel |
 
 ## Layout
 
